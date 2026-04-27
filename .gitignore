@@ -1,3 +1,6 @@
 *.mdf
 *.ldf
 *.ndf
+bin/
+obj/
+.vs/

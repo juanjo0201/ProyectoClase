@@ -25,6 +25,7 @@ namespace ProyectoClase.Formularios
 			pnlProducto.Visible = false;
 			pnlVeterinario.Visible = false;
 			pnlMascota.Visible = false;
+			pnlCitas.Visible = false;
 			
 		}
 
@@ -38,7 +39,9 @@ namespace ProyectoClase.Formularios
 				pnlVeterinario.Visible = false;
 			if (pnlMascota.Visible)
 				pnlMascota.Visible = false;
-		
+			if (pnlCitas.Visible)
+				pnlCitas.Visible = false;
+
 		}
 
 		void mostrarSubmenu(Panel submenu)
@@ -174,6 +177,33 @@ namespace ProyectoClase.Formularios
 		private void btnInformeCompra_Click(object sender, EventArgs e)
 		{
 			abrirEnPanel(new frmInformeOrden());
+			ocultarSubmenu();
+		}
+
+		private void frmIngreso_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void pnlMenu_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+
+		private void btnIngresoCitas_Click(object sender, EventArgs e)
+		{
+			abrirEnPanel(new frmCitas());
+			ocultarSubmenu();
+		}
+
+		private void btnCitas_Click(object sender, EventArgs e)
+		{
+			mostrarSubmenu(pnlCitas);
+		}
+
+		private void btnInformeCitas_Click(object sender, EventArgs e)
+		{
+			abrirEnPanel(new frmInformeCitas());
 			ocultarSubmenu();
 		}
 	}

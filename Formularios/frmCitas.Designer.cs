@@ -140,6 +140,10 @@
 			// 
 			this.cmbDisponibilidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cmbDisponibilidad.FormattingEnabled = true;
+			this.cmbDisponibilidad.Items.AddRange(new object[] {
+            "Disponible",
+            "Ocupado",
+            "Fuera de Servicio"});
 			this.cmbDisponibilidad.Location = new System.Drawing.Point(307, 668);
 			this.cmbDisponibilidad.Name = "cmbDisponibilidad";
 			this.cmbDisponibilidad.Size = new System.Drawing.Size(314, 46);
@@ -270,6 +274,7 @@
 			this.ltbHora.Name = "ltbHora";
 			this.ltbHora.Size = new System.Drawing.Size(155, 196);
 			this.ltbHora.TabIndex = 12;
+			this.ltbHora.SelectedIndexChanged += new System.EventHandler(this.ltbHora_SelectedIndexChanged);
 			// 
 			// frmCitas
 			// 

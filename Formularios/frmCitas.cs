@@ -273,11 +273,16 @@ namespace ProyectoClase.Formularios
 			}
 		}
 
+		private void ltbHora_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
 		bool CargarCita(string cedula)
 		{
 			cmd = new SqlCommand(
 				"SELECT nombreMascota, fecha, hora, disponibilidad " +
-				"FROM tblCita WHERE cedula = @cedula",
+				"FROM tblCita WHERE cedula = '" + txtCedula + "'",
 				cn.AbrirConexion());
 			cmd.Parameters.AddWithValue("@cedula", cedula);
 			da = new SqlDataAdapter(cmd);
@@ -316,8 +321,7 @@ namespace ProyectoClase.Formularios
 
 		private void frmCitas_Load(object sender, EventArgs e)
 		{
-			cmbDisponibilidad.Items.AddRange(new string[] {
-				"Disponible", "Ocupado", "Pendiente" });
+		
 		}
 	}
 }

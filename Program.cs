@@ -17,7 +17,7 @@ namespace ProyectoClase
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCitas());
+            Application.Run(new frmVentaProducto());
         }
     }
 }

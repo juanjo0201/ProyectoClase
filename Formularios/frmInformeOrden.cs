@@ -16,8 +16,8 @@ namespace ProyectoClase.Formularios
 	{
 		cConexion cn;
 		SqlCommand cmd;
-		SqlDataAdapter da,dax;
-		DataTable dt,dtx;
+		SqlDataAdapter da, dax;
+		DataTable dt, dtx;
 		public frmInformeOrden()
 		{
 			InitializeComponent();
@@ -37,18 +37,35 @@ namespace ProyectoClase.Formularios
 
 		private void txtCedula_Leave(object sender, EventArgs e)
 		{
-			SqlCommand cmd = new SqlCommand("select nombre from tblCliente where cedula = '" + txtCedula.Text + "'",cn.AbrirConexion());
-			SqlDataAdapter da= new SqlDataAdapter(cmd);
-			DataTable dt= new DataTable();
+			SqlCommand cmd = new SqlCommand("select nombre from tblCliente where cedula = '" + txtCedula.Text + "'", cn.AbrirConexion());
+			SqlDataAdapter da = new SqlDataAdapter(cmd);
+			DataTable dt = new DataTable();
 			da.Fill(dt);
+
+			DataTable dtx = new DataTable();
 
 			if (dt.Rows.Count != 0)
 			{
 				txtNombre.Text = dt.Rows[0][0].ToString();
-				SqlDataAdapter dax = new SqlDataAdapter("select * from tblOrden where cedula = '" + txtCedula.Text + "'", cn.AbrirConexion());
-				DataTable dtx = new DataTable();
+				SqlDataAdapter dax = new SqlDataAdapter(@"SELECT RIGHT(fechaOrden, 4) AS Año,SUBSTRING(fechaOrden, CHARINDEX('de ', fechaOrden) + 3, CHARINDEX(' de', fechaOrden, CHARINDEX('de ', fechaOrden) + 3) - (CHARINDEX('de ', fechaOrden) + 3)) AS Mes,SUM(total) AS TotalMes FROM tblOrden WHERE cedula = '" + txtCedula.Text + @"' GROUP BY RIGHT(fechaOrden, 4),    SUBSTRING(fechaOrden, CHARINDEX('de ', fechaOrden) + 3, CHARINDEX(' de', fechaOrden, CHARINDEX('de ', fechaOrden) + 3) - (CHARINDEX('de ', fechaOrden) + 3)) ORDER BY Año", cn.AbrirConexion());
 				dax.Fill(dtx);
+
 				dtgCliente.DataSource = dtx;
+
+				chtOrdenes.Series.Clear();
+				chtOrdenes.ChartAreas.Clear();
+
+				chtOrdenes.ChartAreas.Add("Area1");
+
+				chtOrdenes.Series.Add("Ordenes");
+				chtOrdenes.Series["Ordenes"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar;
+
+				chtOrdenes.Series["Ordenes"].XValueMember = "Mes";
+				chtOrdenes.Series["Ordenes"].YValueMembers = "TotalMes";
+
+				chtOrdenes.DataSource = dtx;
+				chtOrdenes.DataBind();
+				chtOrdenes.Legends.Clear();
 			}
 		}
 	}
